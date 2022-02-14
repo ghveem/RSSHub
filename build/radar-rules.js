@@ -3,6 +3,24 @@
         docs:"https://docs.rsshub.app/bbs.html#2047-fen-lei",
         source:[ "/" ],
         target:"/2047/:category?/:sort?" } ] },
+  "12306.cn":{ _name:"12306",
+    kyfw:[ { title:"售票信息",
+        docs:"https://docs.rsshub.app/travel.html#_12306-shou-shu-piao-piao-xin-shen-xi",
+        source:[ "/",
+          "/otn/leftTicket/init" ],
+        target:(params, url) => {
+                    const searchParams = new URL(url).searchParams;
+                    const from = searchParams.get('fs').split(',')[0];
+                    const to = searchParams.get('ts').split(',')[0];
+                    const date = searchParams.get('date');
+
+                    return `/12306/${date}/${from}/${to}`;
+                } } ],
+    www:[ { title:"最新动态",
+        docs:"https://docs.rsshub.app/travel.html#_12306-zui-cuo-xin-dong-tai",
+        source:[ "/",
+          "/mormhweb/1/:id/index_fl.html" ],
+        target:"/12306/zxdt/:id" } ] },
   "18comic.org":{ _name:"18comic 禁漫天堂",
     ".":[ { title:"成人 A 漫",
         docs:"https://docs.rsshub.app/anime.html#18comic-jin-man-tian-tang-cheng-ren-a-man",
@@ -1137,6 +1155,36 @@
         docs:"https://docs.rsshub.app/government.html#guang-zhou-tian-qi-guang-dong-sheng-nei-cheng-shi-yu-jing-xin-hao",
         source:[ "/gz/weatherAlarm/otherCity/" ],
         target:"/gov/guangdong/tqyb/sncsyjxh" } ] },
+  "huizhou.gov.cn":{ _name:"惠州市人民政府",
+    www:[ { title:"政务公开 - 政务要闻",
+        docs:"https://docs.rsshub.app/government.html#guang-yan-an-dong-sheng-xing-xian-ren-min-zheng-zheng-fu-hui-zhou-shi-fu-ren-min-zheng-zheng-fu-zheng-zheng-wu-gong-kai",
+        source:[ "/zwgk/hzsz/:category" ],
+        target:(params) => {
+                    if (params.category === 'zwyw') {
+                        return '/gov/huizhou/zwgk/zwyw';
+                    }
+                } },
+      { title:"政务公开 - 机关动态",
+        docs:"https://docs.rsshub.app/government.html#guang-yan-an-dong-sheng-xing-xian-ren-min-zheng-zheng-fu-hui-zhou-shi-fu-ren-min-zheng-zheng-fu-zheng-zheng-wu-gong-kai",
+        source:[ "/zwgk/hzsz/:category" ],
+        target:(params) => {
+                    if (params.category === 'jgdt') {
+                        return '/gov/huizhou/zwgk/jgdt';
+                    }
+                } },
+      { title:"政务公开 - 县区要闻",
+        docs:"https://docs.rsshub.app/government.html#guang-yan-an-dong-sheng-xing-xian-ren-min-zheng-zheng-fu-hui-zhou-shi-fu-ren-min-zheng-zheng-fu-zheng-zheng-wu-gong-kai",
+        source:[ "/zwgk/hzsz/:category" ],
+        target:(params) => {
+                    if (params.category === 'xqyw') {
+                        return '/gov/huizhou/zwgk/xqyw';
+                    }
+                } } ] },
+  "deyang.gov.cn":{ _name:"德阳市人民政府",
+    ".":[ { title:"德阳市政府公开信息",
+        docs:"https://docs.rsshub.app/government.html#de-yang-shi-fu-ren-min-zheng-zheng-fu",
+        source:[ "/*" ],
+        target:"/sichuan/deyang/govpulicinfo/:countyName/:institutionName?" } ] },
   "guduodata.com":{ _name:"骨朵数据",
     data:[ { title:"日榜",
         docs:"https://docs.rsshub.app/other.html#gu-duo-shu-ju",
@@ -1189,6 +1237,11 @@
         source:[ "/",
           "/blog" ],
         target:"/hex-rays/news" } ] },
+  "hizh.cn":{ _name:"珠海网",
+    ".":[ { title:"栏目",
+        docs:"https://docs.rsshub.app/new-media.html#zhu-hai-wang-lan-mu",
+        source:"/",
+        target:"/hizu/:column?" } ] },
   "hkej.com":{ _name:"信报财经新闻",
     ".":[ { title:"即时新闻",
         docs:"https://docs.rsshub.app/traditional-media.html##xin-bao-cai-jing-xin-wen",
@@ -1682,6 +1735,17 @@
         source:[ "/c/:category",
           "/" ],
         target:"/literotica/category/:category" } ] },
+  "lkong.com":{ _name:"龙空",
+    ".":[ { title:"分区",
+        docs:"https://docs.rsshub.app/bbs.html#long-kong-fen-qu",
+        source:[ "/forum/:id",
+          "/" ],
+        target:"/lkong/forum/:id?/:digest?" },
+      { title:"帖子",
+        docs:"https://docs.rsshub.app/bbs.html#long-kong-tie-zi",
+        source:[ "/thread/:id",
+          "/" ],
+        target:"/lkong/thread/:id" } ] },
   "logonews.cn":{ _name:"LogoNews 标志情报局",
     ".":[ { title:"首页",
         docs:"https://docs.rsshub.app/design.html#logonews-biao-zhi-qing-bao-ju-shou-ye",
@@ -2270,6 +2334,31 @@
         source:[ "/category/:category",
           "/" ],
         target:"/startuplatte/:category?" } ] },
+  "stcn.com":{ _name:"证券时报网",
+    ".":[ { title:"要闻",
+        docs:"https://docs.rsshub.app/finance.html#zheng-quan-shi-bao-wang-yao-wen",
+        source:[ "/xw/:id",
+          "/gd",
+          "/" ],
+        target:(params, url) => `/stcn${new URL(url).pathname}` },
+      { title:"快讯",
+        docs:"https://docs.rsshub.app/finance.html#zheng-quan-shi-bao-wang-kuai-xun",
+        source:[ "/kuaixun/:id",
+          "/kuaixun",
+          "/" ],
+        target:(params, url) => `/stcn${new URL(url).pathname}` },
+      { title:"股市",
+        docs:"https://docs.rsshub.app/finance.html#zheng-quan-shi-bao-wang-gu-shi",
+        source:[ "/stock/:id",
+          "/stock",
+          "/" ],
+        target:(params, url) => `/stcn${new URL(url).pathname}` },
+      { title:"数据",
+        docs:"https://docs.rsshub.app/finance.html#zheng-quan-shi-bao-wang-shu-ju",
+        source:[ "/data/:id",
+          "/data",
+          "/" ],
+        target:(params, url) => `/stcn${new URL(url).pathname}` } ] },
   "storm.mg":{ _name:"風傳媒",
     ".":[ { title:"分类",
         docs:"https://docs.rsshub.app/new-media.html#feng-chuan-mei",
@@ -2670,6 +2759,12 @@
         docs:"https://docs.rsshub.app/other.html#wu-chang-shou-yi-xue-yuan",
         source:"/*",
         target:"/wsyu/news/mtjj" } ] },
+  "wyzxwk.com":{ _name:"乌有之乡",
+    ".":[ { title:"栏目",
+        docs:"https://docs.rsshub.app/new-media.html#wu-you-zhi-xiang-lan-mu",
+        source:[ "/Article/:id",
+          "/" ],
+        target:"/wyzxwk/article/:id?" } ] },
   "wzu.edu.cn":{ _name:"温州大学",
     ".":[ { title:"温州大学 - 主站新闻",
         docs:"https://docs.rsshub.app/university.html#wen-zhou-da-xue" } ] },
@@ -2690,6 +2785,59 @@
         docs:"https://docs.rsshub.app/multimedia.html#you-ku",
         source:[ "/i/:id" ],
         target:"/youku/channel/:id" } ] },
+  "youzhiyouxing.cn":{ _name:"有知有行",
+    ".":[ { title:"有知 - 全部",
+        docs:"https://docs.rsshub.app/finance.html#you-you-wei-zhi-zhi-you-you-wei-xing-hang-xing-hang-heng-you-you-wei-zhi-zhi-wen-zhang-zhang",
+        source:[ "/materials" ],
+        target:"/youzhiyouxing/materials" },
+      { title:"有知 - 知行小酒馆",
+        docs:"https://docs.rsshub.app/finance.html#you-you-wei-zhi-zhi-you-you-wei-xing-hang-xing-hang-heng-you-you-wei-zhi-zhi-wen-zhang-zhang",
+        source:[ "/materials" ],
+        target:(_params, url) => {
+                    if (new URL(url).searchParams.get('column') === '4') {
+                        return '/youzhiyouxing/materials/4';
+                    }
+                } },
+      { title:"有知 - 知行黑板报",
+        docs:"https://docs.rsshub.app/finance.html#you-you-wei-zhi-zhi-you-you-wei-xing-hang-xing-hang-heng-you-you-wei-zhi-zhi-wen-zhang-zhang",
+        source:[ "/materials" ],
+        target:(_params, url) => {
+                    if (new URL(url).searchParams.get('column') === '2') {
+                        return '/youzhiyouxing/materials/2';
+                    }
+                } },
+      { title:"有知 - 无人知晓",
+        docs:"https://docs.rsshub.app/finance.html#you-you-wei-zhi-zhi-you-you-wei-xing-hang-xing-hang-heng-you-you-wei-zhi-zhi-wen-zhang-zhang",
+        source:[ "/materials" ],
+        target:(_params, url) => {
+                    if (new URL(url).searchParams.get('column') === '10') {
+                        return '/youzhiyouxing/materials/10';
+                    }
+                } },
+      { title:"有知 - 孟岩专栏",
+        docs:"https://docs.rsshub.app/finance.html#you-you-wei-zhi-zhi-you-you-wei-xing-hang-xing-hang-heng-you-you-wei-zhi-zhi-wen-zhang-zhang",
+        source:[ "/materials" ],
+        target:(_params, url) => {
+                    if (new URL(url).searchParams.get('column') === '1') {
+                        return '/youzhiyouxing/materials/1';
+                    }
+                } },
+      { title:"有知 - 知行读书会",
+        docs:"https://docs.rsshub.app/finance.html#you-you-wei-zhi-zhi-you-you-wei-xing-hang-xing-hang-heng-you-you-wei-zhi-zhi-wen-zhang-zhang",
+        source:[ "/materials" ],
+        target:(_params, url) => {
+                    if (new URL(url).searchParams.get('column') === '3') {
+                        return '/youzhiyouxing/materials/3';
+                    }
+                } },
+      { title:"有知 - 你好，同路人",
+        docs:"https://docs.rsshub.app/finance.html#you-you-wei-zhi-zhi-you-you-wei-xing-hang-xing-hang-heng-you-you-wei-zhi-zhi-wen-zhang-zhang",
+        source:[ "/materials" ],
+        target:(_params, url) => {
+                    if (new URL(url).searchParams.get('column') === '11') {
+                        return '/youzhiyouxing/materials/11';
+                    }
+                } } ] },
   "yxdzqb.com":{ _name:"游戏打折情报",
     ".":[ { title:"游戏折扣",
         docs:"https://docs.rsshub.app/game.html#you-xi-da-zhe-qing-bao-you-xi-zhe-kou",
